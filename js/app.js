@@ -24,6 +24,28 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+class Player {
+    constructor(){
+        this.sprite = 'images/char-boy.png';
+        this.x = 202;
+        this.y = 606-171-101/2;
+        
+    }
+
+    update(){
+
+    }
+
+    // Draw the player on the screen, required method for game
+	render() {
+		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+
+    handleInput(allowedKeys){
+        
+    }
+}
+
 
 
 // Now instantiate your objects.
