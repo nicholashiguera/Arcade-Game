@@ -22,22 +22,18 @@ Enemy.prototype.render = function() {
 };*/
 
 class Enemy {
-	constructor(rowStart) {
+	constructor(x, y, speed) {
 		this.sprite = 'images/enemy-bug.png';
-		this.speed = 200;
-		this.x = 0;
-		this.y = 0;
+		this.speed = speed;
+		this.x = x;
+		this.y = y;
 	}
 
 	update(dt) {
-		this.collisionCheck();
-
-		this.x += this.speed * dt;
-
-		this.collisionCheck();
-
-		if (this.x > 404) {
-			this.x = 0;
+		if (this.x < 505) {
+			this.x += this.speed * dt;
+		} else {
+			this.x = -101;
 		}
 	}
 
@@ -55,8 +51,8 @@ class Enemy {
 class Player {
 	constructor() {
 		this.sprite = 'images/char-boy.png';
-		this.x = 0;
-		this.y = 0;
+		this.x = 202;
+		this.y = 400;
 	}
 
 	update() {}
@@ -79,10 +75,14 @@ class Player {
 				}
 				break;
 			case 'up':
-				this.y = 1;
+				if (this.y > 0) {
+					this.y -= 83;
+				}
 				break;
 			case 'down':
-				this.y = 2;
+				if (this.y < 400) {
+					this.y += 83;
+				}
 				break;
 		}
 	}
@@ -95,7 +95,7 @@ class Player {
 let player = new Player();
 let allEnemies = [];
 
-let enemy1 = new Enemy(1);
+let enemy1 = new Enemy(0, 0, 100);
 allEnemies.push(enemy1);
 
 // This listens for key presses and sends the keys to your
