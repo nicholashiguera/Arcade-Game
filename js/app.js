@@ -25,8 +25,8 @@ class Enemy {
 	constructor(rowStart) {
 		this.sprite = 'images/enemy-bug.png';
 		this.speed = 200;
-		this.x = 52.5;
-		this.y = 202;
+		this.x = 0;
+		this.y = 0;
 	}
 
 	update(dt) {
@@ -66,7 +66,26 @@ class Player {
 		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 	}
 
-	handleInput(allowedKeys) {}
+	handleInput(allowedKeys) {
+		switch (allowedKeys) {
+			case 'left':
+				if (this.x > 0) {
+					this.x -= 101;
+				}
+				break;
+			case 'right':
+				if (this.x < 404) {
+					this.x += 101;
+				}
+				break;
+			case 'up':
+				this.y = 1;
+				break;
+			case 'down':
+				this.y = 2;
+				break;
+		}
+	}
 }
 
 // Now instantiate your objects.
