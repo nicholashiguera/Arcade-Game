@@ -1,25 +1,5 @@
-// Enemies our player must avoid
-/*var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-};
-
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-};
-
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};*/
+let score = document.getElementById('score');
+let totalLives = document.getElementById('lives');
 
 class Enemy {
 	constructor(x, y, speed) {
@@ -27,6 +7,8 @@ class Enemy {
 		this.speed = speed;
 		this.x = x;
 		this.y = y;
+		this.width = 101;
+		this.height = 71;
 	}
 
 	update(dt) {
@@ -42,7 +24,6 @@ class Enemy {
 		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 	}
 
-	collisionCheck() {}
 }
 
 // Now write your own player class
@@ -53,9 +34,31 @@ class Player {
 		this.sprite = 'images/char-boy.png';
 		this.x = 202;
 		this.y = 400;
+		this.width = 101;
+		this.height = 71;
+		this.win = false;
+		this.lives = 0;
+		this.points = 0;
 	}
 
-	update() {}
+	winCheck() {
+		if (this.points === 9) {
+			console.log('win');
+		}
+	}
+
+	LossCheck() {
+
+	}
+
+	update() {
+		if (this.y === -15) {
+			this.points++;
+			this.x = 202;
+			this.y = 400;
+			score.innerText = `Score: ${this.points}`;
+		}
+	}
 
 	// Draw the player on the screen, required method for game
 	render() {
@@ -85,6 +88,17 @@ class Player {
 				}
 				break;
 		}
+		if (this.y === -15) {
+			this.winCheck();
+			this.LossCheck();
+		}
+	}
+
+	reset() {
+		this.points = 0;
+		this.lives = this.lives + 5;
+		score.innerText = `Score: ${this.points}`;
+		totalLives.innerText = `Lives: ${this.lives}`;
 	}
 }
 
@@ -93,10 +107,13 @@ class Player {
 // Place the player object in a variable called player
 
 let player = new Player();
+
 let allEnemies = [];
 
-let enemy1 = new Enemy(0, 0, 100);
-allEnemies.push(enemy1);
+let enemy1 = new Enemy(-102, 66, 200);
+let enemy2 = new Enemy(-102, 148, 300);
+let enemy3 = new Enemy(-102, 230, 250);
+allEnemies.push(enemy1, enemy2, enemy3);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
