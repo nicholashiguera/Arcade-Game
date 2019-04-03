@@ -47,8 +47,14 @@ class Player {
 		}
 	}
 
-	LossCheck() {
+	lossCheck() {
+		if (this.lives === 0) {
+			console.log('loss');
+		}
+	}
 
+	lossUpdate(input){
+		lives.innerText = `Lives: ${input}`;
 	}
 
 	update() {
@@ -57,6 +63,7 @@ class Player {
 			this.x = 202;
 			this.y = 400;
 			score.innerText = `Score: ${this.points}`;
+			this.winCheck();
 		}
 	}
 
@@ -87,10 +94,6 @@ class Player {
 					this.y += 83;
 				}
 				break;
-		}
-		if (this.y === -15) {
-			this.winCheck();
-			this.LossCheck();
 		}
 	}
 

@@ -178,7 +178,10 @@ var Engine = (function(global) {
 				console.log('collission');
 				player.x = 202;
 				player.y = 400;
-				player.lives -= 1;
+                player.lives -= 1;
+                player.lossUpdate(player.lives);
+                player.lossCheck();
+                
 			}
 		});
 	}
