@@ -23,7 +23,6 @@ class Enemy {
 	render() {
 		ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 	}
-
 }
 
 // Now write your own player class
@@ -43,17 +42,19 @@ class Player {
 
 	winCheck() {
 		if (this.points === 9) {
-			console.log('win');
+			document.getElementById('winningModal').style.display = 'block';
+			this.reset();
 		}
 	}
 
 	lossCheck() {
 		if (this.lives === 0) {
-			console.log('loss');
+			document.getElementById('loseModal').style.display = 'block';
+			this.reset();
 		}
 	}
 
-	lossUpdate(input){
+	lossUpdate(input) {
 		lives.innerText = `Lives: ${input}`;
 	}
 
@@ -130,3 +131,16 @@ document.addEventListener('keyup', function(e) {
 
 	player.handleInput(allowedKeys[e.keyCode]);
 });
+
+
+let winningModal = document.getElementById('winningModal');
+let loseModal = document.getElementById('loseModal');
+
+
+
+window.onclick = function(event) {
+	if (event.target == winningModal || event.target == loseModal) {
+		winningModal.style.display = 'none';
+		loseModal.style.display = 'none';
+	}
+};

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Effective JavaScript: Frogger</title>
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -14,7 +15,30 @@
             <span id="lives">Lives: 5</span>
         </div>
     </div>
-
+    <div class="modal" id="winningModal" >
+            <div class="modal-content">
+            <span id="banner">CONGRATULATIONS YOU HAVE WON THE GAME</span>
+            <P> WITH A SCORE OF 10 </P>
+              <div class="images">
+                <img class="win" src="https://img.icons8.com/bubbles/96/000000/checkmark.png">
+                <img class="trophy" src="https://img.icons8.com/color/50/000000/trophy.png">
+              </div>
+        
+              <span class="gameInfo" id="game"></span>
+        
+            </div>
+    </div>
+    <div class="modal" id="loseModal" >
+            <div class="modal-content">
+              
+              <div class="images">
+                
+              </div>
+        
+              <span class="gameInfo" id="game"></span>
+        
+            </div>
+    </div>
 
 
     <script src="js/resources.js"></script>
