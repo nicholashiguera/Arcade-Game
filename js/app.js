@@ -47,7 +47,7 @@ class Enemy {
 class Player {
 	/**
 	 * Creates an instance of Player with it's image, x and y coordinates as well as width
-	 * and height. Instanciates 
+	 * and height. Instanciates the player lives, points, and win or loss variables.
 	 * @memberof Player
 	 */
 	constructor() {
@@ -63,12 +63,13 @@ class Player {
 	}
 
 	/**
-	 *
+	 * @description Checks to see if we have won based on the number of points, calls the winning modal
+	 * 				and resets the game
 	 *
 	 * @memberof Player
 	 */
 	winCheck() {
-		if (this.points === 9) {
+		if (this.points === 10) {
 			this.win = true;
 			this.winningModal();
 			this.reset();
@@ -76,18 +77,19 @@ class Player {
 	}
 
 	/**
-	 *
+	 * @description	Helper function which takes the HTML items for the winning modal and outputs the proper information.
 	 *
 	 * @memberof Player
 	 */
 	winningModal() {
-		let modal = document.getElementById('winGameModal');
-		document.getElementById('winningModal').style.display = 'block';
-		modal.innerHTML = `You finished the game with a score of ${this.points} and ${this.lives} lives.`;
+		
+		winningModal.style.display = 'block';
+		winGameModal.innerHTML = `You finished the game with a score of ${this.points} and ${this.lives} lives.`;
 	}
 
 	/**
-	 *
+	 * @description Checks to see if we have lost based on the number of lives remaining, calls the loss modal
+	 * 				and resets the game
 	 *
 	 * @memberof Player
 	 */
@@ -100,18 +102,18 @@ class Player {
 	}
 
 	/**
-	 *
+	 * @description	Helper function which takes the HTML items for the lossing modal and outputs the proper information.
 	 *
 	 * @memberof Player
 	 */
 	lossModal() {
-		let modal = document.getElementById('loseGameModal');
-		document.getElementById('loseModal').style.display = 'block';
-		modal.innerHTML = `You finished the game with a score of ${this.points} and ${this.lives} lives.`;
+		
+		loseModal.style.display = 'block';
+		loseGameModal.innerHTML = `You finished the game with a score of ${this.points} and ${this.lives} lives.`;
 	}
 
 	/**
-	 *
+	 *@description Used by the collision method, takes the player lives and updates the live counter
 	 *
 	 * @param {*} input
 	 * @memberof Player
@@ -121,7 +123,8 @@ class Player {
 	}
 
 	/**
-	 *
+	 * @description If the player reaches the water it will increment the points, reset the player
+	 * 				update the score and check for a win.
 	 *
 	 * @memberof Player
 	 */
@@ -146,12 +149,13 @@ class Player {
 	}
 
 	/**
-	 *
+	 * @description Based on the coordinates and boundaries react to the key presses.
 	 *
 	 * @param {*} allowedKeys
 	 * @memberof Player
 	 */
 	handleInput(allowedKeys) {
+
 		switch (allowedKeys) {
 			case 'left':
 				if (this.x > 0) {
@@ -177,7 +181,7 @@ class Player {
 	}
 
 	/**
-	 *
+	 *	@description Resets the player and all of it's variables as well as the board.
 	 *
 	 * @memberof Player
 	 */
@@ -187,17 +191,9 @@ class Player {
 		this.win = false;
 		this.loss = false;
 		score.innerText = `Score: ${this.points}`;
-		totalLives.innerText = `Lives: ${this.lives}`;
+		lives.innerText = `Lives: ${this.lives}`;
 	}
 }
-
-// Setting up the HTML elements that contain our scores and lives
-let score = document.getElementById('score');
-let totalLives = document.getElementById('lives');
-
-// Setting up the HTML elements that contain our winning and loosing modals
-let winningModal = document.getElementById('winningModal');
-let loseModal = document.getElementById('loseModal');
 
 // Instantiating player and enemy array
 let player = new Player();

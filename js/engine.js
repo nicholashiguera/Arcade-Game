@@ -160,6 +160,7 @@ var Engine = (function(global) {
 	/* Calls the reset function on the player
      */
 	function reset() {
+        
 		player.reset();
 	}
 
