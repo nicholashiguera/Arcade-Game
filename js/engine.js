@@ -157,32 +157,33 @@ var Engine = (function(global) {
 		player.render();
 	}
 
-	/* This function does nothing but it could have been a good place to
-     * handle game reset states - maybe a new game menu or a game over screen
-     * those sorts of things. It's only called once by the init() method.
+	/* Calls the reset function on the player
      */
 	function reset() {
 		player.reset();
 	}
 
-	/* This function checks for collitions
+	/**
+     * @description Checks for collision detection based on the widths and heights of the enemy and the player
+     *              and their relative position to each other, if a collision is made the players initial position
+     *              gets reset and the pertinent updates to the lives are done.
+     * @param       - None
+     *
      */
 	function checkCollisions() {
 		allEnemies.forEach(function(enemy) {
-			if (
-				enemy.x < player.x + player.width &&
+			if (enemy.x < player.x + player.width &&
 				enemy.x + enemy.width > player.x &&
 				enemy.y < player.y + player.height &&
-				enemy.y + enemy.height > player.y
-			) {
-				console.log('collission');
+				enemy.y + enemy.height > player.y) {
+				
 				player.x = 202;
 				player.y = 400;
-                player.lives -= 1;
-                player.lossUpdate(player.lives);
-                player.lossCheck();
-                
-			}
+				player.lives -= 1;
+				player.lossUpdate(player.lives);
+				player.lossCheck();
+            }
+            check();
 		});
 	}
 

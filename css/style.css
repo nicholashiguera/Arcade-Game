@@ -1,5 +1,14 @@
 body {
-	text-align: center;
+    font-family: OCR A Std, monospace;
+    font-size: 20px;
+    text-align: center;
+    background: url('../images/pipes.png');
+}
+
+
+
+div#game {
+    background-color: antiquewhite;
 }
 
 .modal {
