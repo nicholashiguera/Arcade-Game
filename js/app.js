@@ -36,22 +36,35 @@ class Player {
 		this.width = 101;
 		this.height = 71;
 		this.win = false;
-		this.lives = 0;
+		this.lose = false;
+		this.lives = 5;
 		this.points = 0;
 	}
 
 	winCheck() {
 		if (this.points === 9) {
-			document.getElementById('winningModal').style.display = 'block';
+			this.winningModal();
 			this.reset();
 		}
 	}
 
+	winningModal(){
+		let modal = document.getElementById('winGameModal');
+		document.getElementById('winningModal').style.display = 'block';
+		modal.innerHTML = `You finished the game with a score of ${this.points} and ${this.lives} lives.`;
+	}
+
 	lossCheck() {
 		if (this.lives === 0) {
-			document.getElementById('loseModal').style.display = 'block';
+			this.lossModal();
 			this.reset();
 		}
+	}
+
+	lossModal(){
+		let modal = document.getElementById('loseGameModal');
+		document.getElementById('loseModal').style.display = 'block';
+		modal.innerHTML = `You finished the game with a score of ${this.points} and ${this.lives} lives.`;
 	}
 
 	lossUpdate(input) {
@@ -100,7 +113,7 @@ class Player {
 
 	reset() {
 		this.points = 0;
-		this.lives = this.lives + 5;
+		this.lives = 5;
 		score.innerText = `Score: ${this.points}`;
 		totalLives.innerText = `Lives: ${this.lives}`;
 	}
