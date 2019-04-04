@@ -184,7 +184,7 @@ var Engine = (function(global) {
 				player.lossUpdate(player.lives);
 				player.lossCheck();
             }
-            check();
+            
 		});
 	}
 

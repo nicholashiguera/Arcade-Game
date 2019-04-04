@@ -72,6 +72,7 @@ class Player {
 		if (this.points === 10) {
 			this.win = true;
 			this.winningModal();
+			check();
 			this.reset();
 		}
 	}
@@ -82,7 +83,6 @@ class Player {
 	 * @memberof Player
 	 */
 	winningModal() {
-		
 		winningModal.style.display = 'block';
 		winGameModal.innerHTML = `You finished the game with a score of ${this.points} and ${this.lives} lives.`;
 	}
@@ -97,6 +97,7 @@ class Player {
 		if (this.lives === 0) {
 			this.loss = true;
 			this.lossModal();
+			check();
 			this.reset();
 		}
 	}
@@ -107,7 +108,6 @@ class Player {
 	 * @memberof Player
 	 */
 	lossModal() {
-		
 		loseModal.style.display = 'block';
 		loseGameModal.innerHTML = `You finished the game with a score of ${this.points} and ${this.lives} lives.`;
 	}
@@ -155,7 +155,6 @@ class Player {
 	 * @memberof Player
 	 */
 	handleInput(allowedKeys) {
-
 		switch (allowedKeys) {
 			case 'left':
 				if (this.x > 0) {
@@ -206,9 +205,15 @@ let enemy3 = new Enemy(-102, 230, 250);
 
 allEnemies.push(enemy1, enemy2, enemy3);
 
+
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function(e) {
+/**
+ * @description Sligthly modified version of the function to be able to remove events later.
+ *
+ * @param {*} e
+ */
+function keys(e) {
 	var allowedKeys = {
 		37: 'left',
 		38: 'up',
@@ -217,32 +222,26 @@ document.addEventListener('keyup', function(e) {
 	};
 
 	player.handleInput(allowedKeys[e.keyCode]);
-});
+}
+document.addEventListener('keyup', keys);
 
 /**
  *	This function checks if the game has been win or lost and then removes the keyboard 
  *	event listener.
- *  !!! Currently not working but not affecting the main functionality of the game!!!
+ *  
  */
 function check() {
 	if (player.loss === true || player.win === true) {
-		document.removeEventListener('keyup', function(e) {
-			var allowedKeys = {
-				37: 'left',
-				38: 'up',
-				39: 'right',
-				40: 'down'
-			};
-
-			player.handleInput(allowedKeys[e.keyCode]);
-		});
+		document.removeEventListener('keyup', keys);
+		
 	}
 }
 
-// This helper listens for clicks outside the modal and closes it.
+// This helper listens for clicks outside the modal and closes it, and resets.
 window.onclick = function(event) {
 	if (event.target == winningModal || event.target == loseModal) {
 		winningModal.style.display = 'none';
 		loseModal.style.display = 'none';
+		
 	}
 };
